@@ -36,4 +36,10 @@ class ExamController extends Controller
 
         return response()->json($exam);
     }
+    public function destroy(string $id)
+    {
+        $exam = Exam::find($id);
+        $exam->delete();
+        return response()->json(['message' => 'Exam deleted successfully'], 200);
+    }
 }

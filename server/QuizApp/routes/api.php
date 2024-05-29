@@ -10,3 +10,4 @@ Route::get('/user', function (Request $request) {
 Route::get('/exams',[ExamController::class,'index']);
 Route::post('/exams',[ExamController::class,'store']);
 Route::put('/exams/{id}',[ExamController::class,'update']);
+Route::delete('/exams/{id}',[ExamController::class,'destroy']);
