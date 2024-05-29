@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('subject');
             $table->unsignedBigInteger('teacher_id');
-            $table->enum('available',['available','unavailable']);
+            $table->enum('availablity',['available','unavailable']);
             $table->timestamps();
             $table->foreign('teacher_id')->references('id')->on('users');
         });
