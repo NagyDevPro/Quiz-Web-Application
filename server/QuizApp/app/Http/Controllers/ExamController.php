@@ -23,5 +23,17 @@ class ExamController extends Controller
         $exam = Exam::create($request->all());
         return response()->json($exam, 200);
     }
-    
+    public function update(Request $request, string $id)
+    {
+        $exam=Exam::find($id);
+        $request->validate([
+            'subject' => 'string',
+            'teacher_id' => 'exists:users,id',
+            'available' => 'in:available,unavailable',
+        ]);
+
+        $exam->update($request->all());
+
+        return response()->json($exam);
+    }
 }

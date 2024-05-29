@@ -9,3 +9,4 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 Route::get('/exams',[ExamController::class,'index']);
 Route::post('/exams',[ExamController::class,'store']);
+Route::put('/exams/{id}',[ExamController::class,'update']);
