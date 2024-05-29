@@ -33,4 +33,11 @@ class QuestionController extends Controller
         return response()->json($question->toArray(), 201);
     }
 
+
+    public function destroy(string $id)
+    {
+        $question=Question::find($id);
+        $question->delete();
+        return response()->json(['message' => 'Question deleted successfully'], 200);   
+    }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('teacher_id');
             $table->enum('availablity',['available','unavailable']);
             $table->timestamps();
-            $table->foreign('teacher_id')->references('id')->on('users');
+            $table->foreign('teacher_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
