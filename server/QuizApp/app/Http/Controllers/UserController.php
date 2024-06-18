@@ -25,6 +25,7 @@ class UserController extends Controller
         return response()->json([
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'role'=>'student'
         ]);
     }
     public function login(LoginRequest $request)
@@ -40,10 +41,12 @@ class UserController extends Controller
         $user = $request->user();
         $token = $user->createToken('API Token')->plainTextToken;
 
+        $logedUser = User::where('email', $request->email)->first();
         return response()->json([
             'user_id'=>$user->id,
             'access_token' => $token,
             'token_type' => 'Bearer',
+            'role'=>$logedUser->role,
         ]);
     }
     public function logout(Request $request)

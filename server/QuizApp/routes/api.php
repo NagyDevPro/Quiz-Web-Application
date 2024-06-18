@@ -19,7 +19,7 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 
 Route::prefix('exams')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [ExamController::class, 'index']);
-    
+    Route::get('/{id}', [ExamController::class, 'show']);
     Route::post('/', [ExamController::class, 'store'])->middleware('role:admin');
     Route::put('/{id}', [ExamController::class, 'update'])->middleware('role:admin');
     Route::delete('/{id}', [ExamController::class, 'destroy'])->middleware('role:admin');
