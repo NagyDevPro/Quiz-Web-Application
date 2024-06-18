@@ -24,7 +24,7 @@ class UpdateExamRequest extends FormRequest
         return [
             'subject' => 'string',
             'teacher_id' => 'exists:users,id',
-            'availability' => 'in:available,unavailable',
+            'availablity' => 'in:available,unavailable',
         ];
     }
 }
