@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Choice;
+use App\Models\Exam;
+use App\Models\Question;
+use App\Models\StudentExam;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -13,11 +17,15 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        User::factory(10)->create();
+        Exam::factory(10)->create();
+        Question::factory(10)->create();
+        Choice::factory(10)->create();
+        StudentExam::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Test User',
+        //     'email' => 'test@example.com',
+        // ]);
     }
 }
