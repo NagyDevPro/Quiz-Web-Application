@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -23,6 +24,25 @@ class UserController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
     
         return response()->json([
+            'access_token' => $token,
+            'token_type' => 'Bearer',
+        ]);
+    }
+    public function login(LoginRequest $request)
+    {
+        $credentials = $request->only('email', 'password');
+
+        if (!Auth::attempt($credentials)) {
+            throw ValidationException::withMessages([
+                'email' => ['The provided credentials are incorrect.'],
+            ]);
+        }
+
+        $user = $request->user();
+        $token = $user->createToken('API Token')->plainTextToken;
+
+        return response()->json([
+            'user_id'=>$user->id,
             'access_token' => $token,
             'token_type' => 'Bearer',
         ]);
