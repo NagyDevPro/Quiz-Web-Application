@@ -14,6 +14,13 @@ class ExamController extends Controller
         $exams=Exam::where('availablity','available')->get();
         return response()->json($exams,200);
     }
+    public function show($id){
+        $exam=Exam::find($id)::with('questions.choices')->first();
+        if(!$exam){
+            return response()->json(['message' => 'Exam not found'], 500);
+        }
+        return $exam;
+    }
     public function store(CreateExamRequest $request)
     {
         $exam = Exam::create($request->validated());
