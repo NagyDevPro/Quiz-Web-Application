@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CreateExamRequest;
+use App\Http\Requests\UpdateExamRequest;
 use App\Models\Exam;
 use Illuminate\Http\Request;
 
@@ -12,33 +14,26 @@ class ExamController extends Controller
         $exams=Exam::where('availablity','available')->get();
         return response()->json($exams,200);
     }
-    public function store(Request $request)
+    public function store(CreateExamRequest $request)
     {
-        $request->validate([
-            'subject' => 'required|string',
-            'teacher_id' => 'required|exists:users,id',
-            'availablity' => 'required|in:available,unavailable',
-        ]);
-
-        $exam = Exam::create($request->all());
+        $exam = Exam::create($request->validated());
         return response()->json($exam, 200);
     }
-    public function update(Request $request, string $id)
+    public function update(UpdateExamRequest $request, string $id)
     {
-        $exam=Exam::find($id);
-        $request->validate([
-            'subject' => 'string',
-            'teacher_id' => 'exists:users,id',
-            'available' => 'in:available,unavailable',
-        ]);
-
-        $exam->update($request->all());
-
-        return response()->json($exam);
+        $exam = Exam::findOrFail($id);
+        if(!$exam){
+            return response()->json(['message' => 'Exam not found'], 500);
+        }
+        $exam->update($request->validated());
+        return response()->json($exam, 200);
     }
     public function destroy(string $id)
     {
         $exam = Exam::find($id);
+        if(!$exam){
+            return response()->json(['message' => 'Exam not found'], 500);
+        }
         $exam->delete();
         return response()->json(['message' => 'Exam deleted successfully'], 200);
     }
