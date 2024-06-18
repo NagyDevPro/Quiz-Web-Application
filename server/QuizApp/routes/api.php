@@ -20,12 +20,12 @@ Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanct
 Route::prefix('exams')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [ExamController::class, 'index']);
     
-    Route::post('/', [ExamController::class, 'store'])->middleware('role:teacher');
-    Route::put('/{id}', [ExamController::class, 'update'])->middleware('role:teacher');
-    Route::delete('/{id}', [ExamController::class, 'destroy'])->middleware('role:teacher');
+    Route::post('/', [ExamController::class, 'store'])->middleware('role:admin');
+    Route::put('/{id}', [ExamController::class, 'update'])->middleware('role:admin');
+    Route::delete('/{id}', [ExamController::class, 'destroy'])->middleware('role:admin');
 });
 
-Route::prefix('questions')->middleware(['auth:sanctum', 'role:teacher'])->group(function () {
+Route::prefix('questions')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/{examId}', [QuestionController::class, 'store']);
     Route::put('/{id}', [QuestionController::class, 'update']);
     Route::delete('/{id}', [QuestionController::class, 'destroy']);
