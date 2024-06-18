@@ -21,13 +21,13 @@ class DatabaseSeeder extends Seeder
         // Exam::factory(10)->create();
         // Question::factory(10)->create();
         // Choice::factory(10)->create();
-        // StudentExam::factory(10)->create();
+        StudentExam::factory(10)->create();
 
-        User::factory()->create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
-            'role'=>'admin',
-            'password'=>'123456'
-        ]);
+        // User::factory()->create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@gmail.com',
+        //     'role'=>'admin',
+        //     'password'=>'123456'
+        // ]);
     }
 }
