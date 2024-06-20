@@ -1,0 +1,30 @@
+.footer {
+  background-color: #f8f9fa; /* Light grey background */
+  border-top: 1px solid #e9ecef;
+  padding: 20px 0;
+}
+
+.footer h5 {
+  color: #343a40; /* Dark grey color */
+}
+
+.footer p,
+.footer ul {
+  color: #6c757d; /* Muted grey color */
+}
+
+.footer ul {
+  padding: 0;
+}
+
+.footer ul li {
+  list-style: none;
+}
+
+.footer ul li a {
+  text-decoration: none;
+}
+
+.footer ul li a:hover {
+  text-decoration: underline;
+}

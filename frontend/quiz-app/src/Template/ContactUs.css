@@ -1,0 +1,37 @@
+/* src/components/ContactUs.css */
+
+.contact-us-container {
+  padding: 20px;
+  border-radius: 8px;
+}
+
+.contact-us-container h2 {
+  color: #103050;
+  font-size: 3rem;
+}
+
+.contact-us-container p {
+  color: #6c757d; /* Muted grey color */
+}
+
+.form-label {
+  color: #343a40; /* Dark grey color */
+}
+
+.form-control {
+  border-radius: 1.2rem;
+}
+
+.btn-primary {
+  background-color: #007bff;
+  border-color: #007bff;
+  margin-left: 50%;
+  margin-top: 5%;
+  padding: 30%;
+
+}
+
+.btn-primary:hover {
+  background-color: #0056b3;
+  border-color: #0056b3;
+}

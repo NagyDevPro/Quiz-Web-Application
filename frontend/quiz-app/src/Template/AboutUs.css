@@ -1,0 +1,23 @@
+
+.about-us-container {
+  padding: 20px;
+  background-color: #f8f9fa; /* Light grey background */
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.about-us-image {
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.title {
+  color: #103050;
+  font-size: 3rem;
+  margin-bottom: 10%;
+  margin-top: 2%; 
+}
+
+p {
+  color: #6c757d; /* Muted grey color */
+}
