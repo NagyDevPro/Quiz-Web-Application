@@ -1,18 +1,27 @@
-
 import './App.css';
-import AboutUs from './Template/AboutUs';
-import ContactUs from './Template/ContactUs';
-import Footer from './Template/Footer';
-import NavBar from './Template/NavBar';
+import { Route, RouterProvider, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
+
+import HomePage from './Student/HomePage';
+import NotFound from './Template/NotFound';
+import { BrowserRouter } from 'react-router-dom';
+import IndexPage from './Template/IndexPage';
+
 
 function App() {
+  //general routes
+  const router = createBrowserRouter(createRoutesFromElements(
+    <>
+     <Route path="/" element={<IndexPage/>}>
+       <Route index element={<HomePage/>}/>
+       <Route path="*" element={<NotFound/>}/>
+
+     </Route>
+    </>
+
+  ))
   return (
     <div className="App">
-      <NavBar/>
-      <AboutUs/>
-      {/* <ContactUs/> */}
-      <div className='my-5'></div>
-      <Footer/>
+      <RouterProvider router={router} />
     </div>
   );
 }

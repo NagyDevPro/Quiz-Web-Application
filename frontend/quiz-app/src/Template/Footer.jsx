@@ -1,5 +1,4 @@
 import React from 'react'
-import { Link } from 'react-router-dom'
 import "./Footer.css"
 export default function Footer() {
   return (
@@ -25,9 +24,9 @@ export default function Footer() {
           <div className="col-md-4">
             <h5>Follow Us</h5>
             <ul className="list-unstyled">
-              <li><a href="#" className="text-dark"><i className="bi bi-facebook"></i> Facebook</a></li>
-              <li><a href="#" className="text-dark"><i className="bi bi-twitter"></i> Twitter</a></li>
-              <li><a href="#" className="text-dark"><i className="bi bi-instagram"></i> Instagram</a></li>
+              <li><a href="/hello" className="text-dark"><i className="bi bi-facebook"></i> Facebook</a></li>
+              <li><a href="here" className="text-dark"><i className="bi bi-twitter"></i> Twitter</a></li>
+              <li><a href="is" className="text-dark"><i className="bi bi-instagram"></i> Instagram</a></li>
             </ul>
           </div>
         </div>

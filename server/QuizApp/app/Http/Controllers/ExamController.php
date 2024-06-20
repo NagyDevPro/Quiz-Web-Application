@@ -15,7 +15,7 @@ class ExamController extends Controller
         return response()->json($exams,200);
     }
     public function show($id){
-        $exam=Exam::find($id)::with('questions.choices')->first();
+        $exam = Exam::with('questions.choices')->find($id);
         if(!$exam){
             return response()->json(['message' => 'Exam not found'], 500);
         }
