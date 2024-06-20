@@ -1,0 +1,12 @@
+.homeIcon{
+    width: 100px;
+    height: 100px;
+}
+.navBarContainer{
+    display: flex;
+    justify-content: space-between;
+    padding: 1%;
+    padding-top: 3%;
+    font-weight: 500;
+    color:rgb(125, 118, 118);
+}
