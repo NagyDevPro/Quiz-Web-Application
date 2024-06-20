@@ -20,6 +20,11 @@ class QuestionController extends Controller
             'mark' => $request->mark,
             'question' => $request->question,
         ]);
+        $existingQuestion = $exam->questions()->where('question', $request->question)->first();
+
+        if ($existingQuestion) {
+            return response()->json(['message' => 'This question already exists in the exam.'], 409);
+        }
 
         $exam->questions()->save($question);
 
@@ -59,12 +64,12 @@ class QuestionController extends Controller
     }
     public function destroy(string $id)
     {
-        $question=Question::find($id);
-        if(!$question){
+        $question = Question::find($id);
+        if (!$question) {
             return response()->json(['message' => 'question not found'], 500);
         }
         $question->delete();
-        return response()->json(['message' => 'Question deleted successfully'], 200);   
+        return response()->json(['message' => 'Question deleted successfully'], 200);
     }
 
     public function getbyid($id){
