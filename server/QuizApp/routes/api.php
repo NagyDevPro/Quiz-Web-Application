@@ -35,4 +35,5 @@ Route::prefix('results')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [StudentExamController::class, 'index'])->middleware('role:admin');
     Route::get('/my-results/', [StudentExamController::class, 'showAllResultofStudent'])->middleware('role:student');
     Route::get('/{examId}', [StudentExamController::class, 'show'])->middleware('role:student');
+    Route::post('/', [StudentExamController::class, 'store']);
 });
