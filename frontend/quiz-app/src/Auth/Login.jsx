@@ -33,9 +33,7 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
-    if (validationErrors.email || validationErrors.password) {
-      setErrors(validationErrors);
-    } else {
+    if (Object.keys(validationErrors).length === 0) {
       dispatch(loginUser(formData));
     }
   };
