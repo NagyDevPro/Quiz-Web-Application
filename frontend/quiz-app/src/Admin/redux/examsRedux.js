@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { showAllExams } from "../api/exams-api";
+import { showAllExams ,deleteExam as apiDeleteExam  } from "../api/exams-api";
 
 const initialState = {
   exams: [],
@@ -22,6 +22,20 @@ export const getAllExams = createAsyncThunk(
   }
 );
 
+export const deleteExam = createAsyncThunk(
+    'exam/deleteExam',
+    async (examId, thunkApi) => {
+      try {
+        await apiDeleteExam(examId); 
+        return examId;
+      } catch (error) {
+        return thunkApi.rejectWithValue(error.message);
+      }
+    }
+  );
+
+ 
+
 const ExamSlice = createSlice({
   name: "exam",
   initialState,
@@ -39,9 +53,21 @@ const ExamSlice = createSlice({
       .addCase(getAllExams.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
+      })
+      .addCase(deleteExam.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(deleteExam.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.exams = state.exams.filter(exam => exam.id !== action.payload);
+      })
+      .addCase(deleteExam.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
       });
   },
 });
 
 export const examReducer = ExamSlice.reducer;
-export const examActions = ExamSlice.actions;
+export const examActions = {...ExamSlice.actions ,deleteExam} ;

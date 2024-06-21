@@ -13,9 +13,9 @@ class Exam extends Model
         'teacher_id',
         'available',
     ];
-    public function teacher()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class,'teacher_id');
     }
 
     public function questions()

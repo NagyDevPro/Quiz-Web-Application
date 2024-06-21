@@ -11,7 +11,7 @@ class ExamController extends Controller
 {
     public function index()
     {
-        $exams=Exam::where('availablity','available')->get();
+        $exams=Exam::where('availablity','available')->with('user')->get();
         return response()->json($exams,200);
     }
     

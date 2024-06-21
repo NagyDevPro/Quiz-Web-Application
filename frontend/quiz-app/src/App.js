@@ -34,6 +34,7 @@ function App() {
           <Route path="/questionform-update/:id" element={<QuestionForm />} />
           <Route path="/static" element={<StaticQuestionTable />} />
           <Route path="exams" element={<ShowAllExams />} />
+          <Route path="/add-exam" />
 
           <Route path="*" element={<NotFound />} />
         </Route>

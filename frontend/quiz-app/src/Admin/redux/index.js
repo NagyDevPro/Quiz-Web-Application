@@ -3,8 +3,9 @@ import { questionReducer } from "./questionRedux";
 import { examReducer } from "./examsRedux";
 
 export const store = configureStore({
-  reducer: {
-    QuestionSlice: questionReducer,
-    exam: examReducer, 
-  },
+    reducer: {
+        QuestionSlice: questionReducer,
+        exam: examReducer,
+    },
+
 });
