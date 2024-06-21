@@ -71,4 +71,12 @@ class QuestionController extends Controller
         $question->delete();
         return response()->json(['message' => 'Question deleted successfully'], 200);
     }
+
+    public function getbyid($id){
+        $question=Question::find($id);
+        if(!$question){
+            return response()->json(['message' => 'question not found'], 500);
+        }
+        return $question;
+    }
 }

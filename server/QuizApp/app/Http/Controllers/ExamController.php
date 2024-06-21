@@ -14,6 +14,7 @@ class ExamController extends Controller
         $exams=Exam::where('availablity','available')->get();
         return response()->json($exams,200);
     }
+    
     public function show($id){
         $exam = Exam::with('questions.choices')->find($id);
         if(!$exam){

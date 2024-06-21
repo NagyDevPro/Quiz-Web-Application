@@ -2,7 +2,6 @@
 
 .contact-us-container {
   padding: 20px;
-  border-radius: 8px;
 }
 
 .contact-us-container h2 {
@@ -11,24 +10,31 @@
 }
 
 .contact-us-container p {
-  color: #6c757d; /* Muted grey color */
+  color: #6c757d; 
 }
 
 .form-label {
-  color: #343a40; /* Dark grey color */
+  color: #343a40; 
 }
 
 .form-control {
   border-radius: 1.2rem;
+  height: 3rem;
+}
+
+#message {
+  height: 6rem;
 }
 
 .btn-primary {
   background-color: #007bff;
   border-color: #007bff;
-  margin-left: 50%;
+  margin-left: 1%;
   margin-top: 5%;
-  padding: 30%;
-
+  width: 100%;
+  height: 2.5rem;
+  border-radius: 3rem; 
+  font-size: 2.5rem; 
 }
 
 .btn-primary:hover {

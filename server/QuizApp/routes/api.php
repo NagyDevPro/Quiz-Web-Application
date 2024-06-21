@@ -17,7 +17,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::prefix('exams')->middleware('auth:sanctum')->group(function () {
+Route::prefix('exams')->group(function () {
     Route::get('/', [ExamController::class, 'index']);
     Route::get('/{id}', [ExamController::class, 'show']);
     Route::post('/', [ExamController::class, 'store'])->middleware('role:admin');
@@ -25,7 +25,7 @@ Route::prefix('exams')->middleware('auth:sanctum')->group(function () {
     Route::delete('/{id}', [ExamController::class, 'destroy'])->middleware('role:admin');
 });
 
-Route::prefix('questions')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
+Route::prefix('questions')->group(function () {
     Route::post('/{examId}', [QuestionController::class, 'store']);
     Route::put('/{id}', [QuestionController::class, 'update']);
     Route::delete('/{id}', [QuestionController::class, 'destroy']);
