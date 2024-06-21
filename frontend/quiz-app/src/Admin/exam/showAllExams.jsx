@@ -5,7 +5,7 @@ import { getAllExams } from '../redux/examsRedux';
 import { Link } from 'react-router-dom';
 
 function ExamTable() {
-    const { exams, isLoading, error } = useSelector(state => state.ExamSlice);
+    const { exams, isLoading, error } = useSelector(state => state.exam); // Corrected state selector
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -19,7 +19,7 @@ function ExamTable() {
                 <h1 className='alert alert-danger'>Error: {error}</h1>
             ) : (
                 <div>
-                    <Link to={''}>
+                    <Link to='/add-exam'> {/* Added valid route */}
                         <button className='btn btn-primary p-1 m-1'>Add Exam</button>
                     </Link>
 
@@ -28,16 +28,18 @@ function ExamTable() {
                             <tr className='text-center'>
                                 <th>Subject</th>
                                 <th>Teacher</th>
-                                <th>Availablity</th>
+                                <th>Availability</th> {/* Corrected typo */}
+                                <th>Actions</th> {/* Added Actions column */}
                             </tr>
                         </thead>
                         <tbody>
                             {exams.map((exam) => (
                                 <tr key={exam.subject}>
+                                    <td>{exam.subject}</td> {/* Corrected mapping */}
                                     <td>{exam.teacher_id}</td>
-                                    <td>{exam.availablity}</td>
+                                    <td>{exam.availability}</td> {/* Corrected typo */}
                                     <td>
-                                        <Link to={``}>
+                                        <Link to={`/update-exam/${exam.id}`}> {/* Added valid route */}
                                             <button className='btn btn-success p-1 m-1'>Update</button>
                                         </Link>
                                         <button className='btn btn-danger p-1 m-1'>Delete</button>

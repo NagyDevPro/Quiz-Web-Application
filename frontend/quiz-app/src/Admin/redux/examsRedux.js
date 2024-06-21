@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {showAllExams} from "../api/exams-api";
+import { showAllExams } from "../api/exams-api";
 
 const initialState = {
   exams: [],
@@ -34,13 +34,12 @@ const ExamSlice = createSlice({
       })
       .addCase(getAllExams.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.exams = action.payload.exams;
+        state.exams = action.payload; 
       })
       .addCase(getAllExams.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
-      })
-      
+      });
   },
 });
 

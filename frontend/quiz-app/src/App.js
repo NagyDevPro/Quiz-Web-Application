@@ -13,7 +13,6 @@ import AboutUs from "./Template/AboutUs";
 import ContactUs from "./Template/ContactUs";
 import Login from "./Auth/Login";
 import Register from "./Auth/Register";
-import UnAutheriazed from "./Template/UnAutheriazed";
 import ShowAllExams from "./Admin/exam/showAllExams";
 import QuestionTable from "./Admin/exam-quiestions/allquestions";
 import StaticQuestionTable from "./Admin/exam-quiestions/staticData";
