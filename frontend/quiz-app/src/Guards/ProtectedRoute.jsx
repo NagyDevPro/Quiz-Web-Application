@@ -18,11 +18,11 @@ const ProtectedRoute = ({ admin }) => {
 };
 
 const PublicRoute = () => {
-  const isLoggedIn = !!sessionStorage.getItem("token");
+//   const isLoggedIn = !!sessionStorage.getItem("token");
 
-  if (isLoggedIn) {
-    return <Navigate to="/" replace />;
-  }
+//   if (isLoggedIn) {
+//     return <Navigate to="/" replace />;
+//   }
 
   return <Outlet />;
 };
