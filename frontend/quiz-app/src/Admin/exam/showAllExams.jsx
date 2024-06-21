@@ -18,7 +18,7 @@ function ExamTable() {
   };
 
   return (
-    <div className="mt-4 bg-light p-5 w-100">
+    <div className="mt-4 p-5 w-100">
       {isLoading && (
         <h1 className="alert alert-success text-dark">Loading...</h1>
       )}

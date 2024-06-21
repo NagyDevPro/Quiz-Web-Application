@@ -17,6 +17,8 @@ import ShowAllExams from "./Admin/exam/showAllExams";
 import QuestionTable from "./Admin/exam-quiestions/allquestions";
 import StaticQuestionTable from "./Admin/exam-quiestions/staticData";
 import QuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
+import FormExam from "./Admin/exam/FormExam";
+import EditFormExam from "./Admin/exam/EditFormExam";
 
 function App() {
   //general routes
@@ -34,8 +36,8 @@ function App() {
           <Route path="/questionform-update/:id" element={<QuestionForm />} />
           <Route path="/static" element={<StaticQuestionTable />} />
           <Route path="exams" element={<ShowAllExams />} />
-          <Route path="/add-exam" />
-
+          <Route path="/add-exam" element={<FormExam/>}/>
+          <Route path="/update-exam/:id" element={<EditFormExam/>}/>
           <Route path="*" element={<NotFound />} />
         </Route>
       </>
