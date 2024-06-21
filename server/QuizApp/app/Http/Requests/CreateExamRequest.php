@@ -24,7 +24,7 @@ class CreateExamRequest extends FormRequest
         return [
             'subject' => 'required|string',
             'teacher_id' => 'required|exists:users,id',
-            'availability' => 'required|in:available,unavailable',
+            'availablity' => 'required|in:available,unavailable',
         ];
     }
 }

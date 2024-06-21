@@ -11,7 +11,7 @@ class Exam extends Model
     protected $fillable = [
         'subject',
         'teacher_id',
-        'available',
+        'availablity',
     ];
     public function user()
     {
