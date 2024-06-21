@@ -19,7 +19,7 @@ export const loginUser = createAsyncThunk(
   "auth/loginUser",
   async (userData, { rejectWithValue }) => {
     try {
-      const response = await axios.post(`${baseURL}/auth/login`, userData);
+      const response = await axios.post(`${baseURL}/login`, userData);
       return response.data;
     } catch (error) {
       return rejectWithValue(error.response.data);
@@ -67,6 +67,7 @@ const authSlice = createSlice({
         state.error = action.payload;
       })
       .addCase(loginUser.fulfilled, (state, action) => {
+          console.log("success");
         state.name = action.payload.name;
         state.isAuthenticated = true;
         state.role = action.payload.role;
@@ -77,6 +78,7 @@ const authSlice = createSlice({
         localStorage.setItem("user_id", action.payload.user_id);
       })
       .addCase(loginUser.rejected, (state, action) => {
+          console.log("not success");
         state.error = action.payload;
       })
       .addCase(logoutUser.fulfilled, (state) => {

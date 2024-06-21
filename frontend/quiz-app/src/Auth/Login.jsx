@@ -69,6 +69,7 @@ export default function Login() {
               {errors.password && <div className="text-danger">{errors.password}</div>}
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
+            <p>{authState.error}</p>
           </form>
           <p className="mt-3">
             Don't have an account? <NavLink to="/register">Register here</NavLink>
