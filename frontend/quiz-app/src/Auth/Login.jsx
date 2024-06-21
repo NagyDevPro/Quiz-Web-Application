@@ -33,10 +33,12 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
-    if (Object.keys(validationErrors).length === 0) {
-      dispatch(loginUser(formData));
-    }
-  };
+    if (validationErrors.email || validationErrors.password) {
+      setErrors(validationErrors); 
+    }else{
+    dispatch(loginUser(formData));
+    }  
+};
 
   return (
     <div className="auth-container container mt-5">
@@ -69,7 +71,6 @@ export default function Login() {
               {errors.password && <div className="text-danger">{errors.password}</div>}
             </div>
             <button type="submit" className="btn btn-primary">Login</button>
-            <p>{authState.error}</p>
           </form>
           <p className="mt-3">
             Don't have an account? <NavLink to="/register">Register here</NavLink>
