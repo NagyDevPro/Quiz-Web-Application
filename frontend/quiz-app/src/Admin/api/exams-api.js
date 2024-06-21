@@ -25,14 +25,17 @@ const deleteExam = (id, token) =>
     },
   });
 
-const showAllExams = (token) =>
-    axios.get(examsUrl);
 
-// {
-//       headers: {
-//         Authorization: `Bearer ${token}`,
-//       },
-//     }
+// Note You Should Put Token Here If you want to test the component 
+//comment the header section   
+const showAllExams = (token) =>
+  axios.get(examsUrl, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+
     
 const showSpecificExam = (id, token) =>
   axios.get(specificExamUrl(id), {
