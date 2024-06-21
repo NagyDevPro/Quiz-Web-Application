@@ -17,6 +17,7 @@ import ShowAllExams from "./Admin/exam/showAllExams";
 import QuestionTable from "./Admin/exam-quiestions/allquestions";
 import StaticQuestionTable from "./Admin/exam-quiestions/staticData";
 import QuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
+import { ProtectedRoute, PublicRoute } from "./Guards/ProtectedRoute";
 
 function App() {
   //general routes
@@ -25,16 +26,30 @@ function App() {
       <>
         <Route path="/" element={<IndexPage />}>
           <Route index element={<HomePage />} />
-          <Route path="about" element={<AboutUs />} />
-          <Route path="contact" element={<ContactUs />} />
-          <Route path="login" element={<Login />} />
-          <Route path="register" element={<Register />} />
-          <Route path="/list_all_exam_questions" element={<QuestionTable />} />
-          <Route path="/questionform" element={<QuestionForm />} />
-          <Route path="/questionform-update/:id" element={<QuestionForm />} />
-          <Route path="/static" element={<StaticQuestionTable />} />
-          <Route path="exams" element={<ShowAllExams />} />
 
+          
+          <Route element={<PublicRoute />}>
+            <Route path="about" element={<AboutUs />} />
+            <Route path="contact" element={<ContactUs />} />
+            <Route path="login" element={<Login />} />
+            <Route path="register" element={<Register />} />
+          </Route>
+          
+          
+
+
+          {/* admin section */}
+          <Route element={<ProtectedRoute admin={true} />}>
+            <Route
+              path="/list_all_exam_questions"
+              element={<QuestionTable />}
+            />
+            <Route path="/questionform" element={<QuestionForm />} />
+            <Route path="/questionform-update/:id" element={<QuestionForm />} />
+            <Route path="/static" element={<StaticQuestionTable />} />
+            <Route path="exams" element={<ShowAllExams />} />
+            <Route path="/add-exam" />
+          </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
       </>
