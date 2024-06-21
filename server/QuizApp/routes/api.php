@@ -23,7 +23,7 @@ Route::prefix('exams')->group(function () {
     Route::get('/{id}', [ExamController::class, 'show']);
     Route::post('/', [ExamController::class, 'store']);
     Route::put('/{id}', [ExamController::class, 'update']);
-    Route::delete('/{id}', [ExamController::class, 'destroy'])->middleware('role:admin');
+    Route::delete('/{id}', [ExamController::class, 'destroy']);
 });
 
 Route::prefix('questions')->group(function () {

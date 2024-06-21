@@ -1,5 +1,11 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { showAllExams ,deleteExam as apiDeleteExam  } from "../api/exams-api";
+import {
+  showAllExams,
+  deleteExam as apiDeleteExam,
+  createExam,
+  editExam,
+  showSpecificExam,
+} from "../api/exams-api";
 
 const initialState = {
   exams: [],
@@ -21,20 +27,56 @@ export const getAllExams = createAsyncThunk(
     }
   }
 );
+export const showExamById = createAsyncThunk(
+  "exam/showExamById",
+  async (examId, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const res = await showSpecificExam(examId);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 export const deleteExam = createAsyncThunk(
-    'exam/deleteExam',
-    async (examId, thunkApi) => {
-      try {
-        await apiDeleteExam(examId); 
-        return examId;
-      } catch (error) {
-        return thunkApi.rejectWithValue(error.message);
-      }
+  "exam/deleteExam",
+  async (examId, thunkApi) => {
+    try {
+      await apiDeleteExam(examId);
+      return examId;
+    } catch (error) {
+      return thunkApi.rejectWithValue(error.message);
     }
-  );
+  }
+);
 
- 
+export const addExam = createAsyncThunk(
+  "question/addExam",
+  async (exam, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const res = await createExam(exam);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+export const updateExam = createAsyncThunk(
+  "question/editExam",
+  async ({ exam, id }, thunkApi) => {
+    const { rejectWithValue } = thunkApi;
+    try {
+      const res = await editExam(exam, id);
+      return res.data;
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
 
 const ExamSlice = createSlice({
   name: "exam",
@@ -48,7 +90,7 @@ const ExamSlice = createSlice({
       })
       .addCase(getAllExams.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.exams = action.payload; 
+        state.exams = action.payload;
       })
       .addCase(getAllExams.rejected, (state, action) => {
         state.isLoading = false;
@@ -60,9 +102,28 @@ const ExamSlice = createSlice({
       })
       .addCase(deleteExam.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.exams = state.exams.filter(exam => exam.id !== action.payload);
+        state.exams = state.exams.filter((exam) => exam.id !== action.payload);
       })
       .addCase(deleteExam.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateExam.fulfilled, (state, action) => {
+        const updatedExam = action.payload;
+        state.exams = state.exams.map((exam) =>
+          exam.id === updatedExam.id ? updatedExam : exam
+        );
+        state.isLoading = false;
+      })
+      .addCase(showExamById.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(showExamById.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.exam = action.payload;
+      })
+      .addCase(showExamById.rejected, (state, action) => {
         state.isLoading = false;
         state.error = action.payload;
       });
@@ -70,4 +131,4 @@ const ExamSlice = createSlice({
 });
 
 export const examReducer = ExamSlice.reducer;
-export const examActions = {...ExamSlice.actions ,deleteExam} ;
+export const examActions = { ...ExamSlice.actions, deleteExam };
