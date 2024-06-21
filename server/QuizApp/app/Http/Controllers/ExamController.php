@@ -44,7 +44,7 @@ class ExamController extends Controller
     }
     public function update(UpdateExamRequest $request, string $id)
     {
-        $exam = Exam::findOrFail($id);
+        $exam = Exam::find($id);
         if (!$exam) {
             return response()->json(['message' => 'Exam not found'], 500);
         }
