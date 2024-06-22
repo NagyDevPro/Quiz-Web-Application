@@ -36,17 +36,18 @@ export default function StudentExamQuestions() {
   if (error) return <div className="error-message">Error: {error}</div>;
 
   return (
-    <div className="exam-questions-container">
+    <div className="container exam-questions-container">
       {exam?.questions.map(question => (
         <div key={question.id} className="question-item">
           <h2>{question.question}</h2>
           <div className="choices-list">
-            {question.choices.map(choice => (
+            {question.choices.map((choice, index) => (
               <div
                 key={choice.id}
                 className={`choice-item ${selectedChoices[question.id] === choice.id ? 'active' : ''}`}
                 onClick={() => handleChoiceClick(question.id, choice.id)}
               >
+                <span className={`choice-letter ${selectedChoices[question.id] === choice.id ? 'active' : ''}`}>{String.fromCharCode(65 + index)}</span>
                 {choice.choice}
               </div>
             ))}
