@@ -72,7 +72,7 @@ export const updateExam = createAsyncThunk(
   async ({ exam, id }, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
-      const res = await editExam(exam, id);
+      const res = await editExam(id, exam);
       return res.data;
     } catch (error) {
       return rejectWithValue(error.message);

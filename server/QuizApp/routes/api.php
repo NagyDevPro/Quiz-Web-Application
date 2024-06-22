@@ -26,10 +26,12 @@ Route::prefix('exams')->group(function () {
     Route::delete('/{id}', [ExamController::class, 'destroy']);
 });
 
-Route::prefix('questions')->group(function () {
+Route::prefix('questions')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/{examId}', [QuestionController::class, 'store']);
     Route::put('/{id}', [QuestionController::class, 'update']);
     Route::delete('/{id}', [QuestionController::class, 'destroy']);
+    Route::get('/{id}', [QuestionController::class, 'getbyid']);
+
 });
 
 Route::prefix('results')->middleware('auth:sanctum')->group(function () {

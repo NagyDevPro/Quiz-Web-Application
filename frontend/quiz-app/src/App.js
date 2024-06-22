@@ -4,6 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  useParams,
 } from "react-router-dom";
 
 import HomePage from "./Student/HomePage";
@@ -15,7 +16,7 @@ import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import ShowAllExams from "./Admin/exam/showAllExams";
 import QuestionTable from "./Admin/exam-quiestions/allquestions";
-import StaticQuestionTable from "./Admin/exam-quiestions/staticData";
+import AddQuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
 import QuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
 import FormExam from "./Admin/exam/FormExam";
 import EditFormExam from "./Admin/exam/EditFormExam";
@@ -23,14 +24,28 @@ import { ProtectedRoute, PublicRoute } from "./Guards/ProtectedRoute";
 import StudentExamsPage from "./Student/StudentExamsPage";
 import StudentExamQuestions from "./Student/StudentExamQuestions";
 import StudentExamResult from "./Student/StudentExamResult";
+import ResultsComponent from "./Admin/results/students-results-exams";
+import UpdateQuestionForm from "./Admin/exam-quiestions/updateQuestion";
 
 function App() {
+  const { id } = useParams(); 
+
   //general routes
   const router = createBrowserRouter(
     createRoutesFromElements(
       <>
         <Route path="/" element={<IndexPage />}>
           <Route index element={<HomePage />} />
+          <Route path="about" element={<AboutUs />} />
+          <Route path="contact" element={<ContactUs />} />
+          <Route path="login" element={<Login />} />
+          <Route path="register" element={<Register />} />
+          <Route path="/list_all_exam_questions/:id" element={<QuestionTable />} />
+          <Route path="/list_all_exam_questions" element={<QuestionTable />} />
+          <Route path="/questionform/:id" element={<AddQuestionForm examId={id} />} />
+          <Route path="/questionform-update/:id" element={<UpdateQuestionForm />} />
+          <Route path="/allStudentResults" element={<ResultsComponent />} />
+          <Route path="exams" element={<ShowAllExams />} />
 
           <Route element={<PublicRoute />}>
             <Route path="about" element={<AboutUs />} />
@@ -53,9 +68,9 @@ function App() {
               path="/list_all_exam_questions"
               element={<QuestionTable />}
             />
-            <Route path="/questionform" element={<QuestionForm />} />
-            <Route path="/questionform-update/:id" element={<QuestionForm />} />
-            <Route path="/static" element={<StaticQuestionTable />} />
+             <Route path="/allStudentResults" element={<ResultsComponent />} />
+            <Route path="/questionform/:id" element={<AddQuestionForm examId={id} />} />
+            <Route path="/questionform-update/:id" element={<UpdateQuestionForm />} />
             <Route path="exams" element={<ShowAllExams />} />
             <Route path="/add-exam" element={<FormExam />} />
             <Route path="/update-exam/:id" element={<EditFormExam />} />

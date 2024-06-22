@@ -11,12 +11,8 @@ const createExam = (examData, token) =>
     },
   });
 
-const editExam = (id, examData, token) =>
-  axios.put(specificExamUrl(id), examData, {
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+const editExam = (id, examData) =>
+  axios.put(specificExamUrl(id), examData);
 
 const deleteExam = (id, token) =>
   axios.delete(specificExamUrl(id), {

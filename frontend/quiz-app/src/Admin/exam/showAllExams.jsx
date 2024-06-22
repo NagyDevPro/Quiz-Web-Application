@@ -29,42 +29,39 @@ function ExamTable() {
             <button className="btn btn-primary p-1 m-1">Add Exam</button>
           </Link>
 
-          <Table striped bordered hover size="lg">
-            <thead>
-              <tr className="text-center">
-                <th>Subject</th>
-                <th>Teacher</th>
-                <th>Availability</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {exams.map((exam) => (
-                <tr key={exam.subject}>
-                  <td>{exam.subject}</td>
-                  <td>{exam.user.name}</td>
-                  <td>{exam.availablity}</td>
-                  <td>
-                    <Link to={`/update-exam/${exam.id}`}>
-                      <button className="btn btn-success p-1 m-1">
-                        Update
-                      </button>
-                    </Link>
-                    <button
-                      className="btn btn-danger p-1 m-1"
-                      onClick={() => deleteHandler(exam.id)}
-                    >
-                      Delete
-                    </button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+                    <Table striped bordered hover size="lg">
+                        <thead>
+                            <tr className='text-center'>
+                                <th>Subject</th>
+                                <th>Teacher</th>
+                                <th>Availability</th> 
+                                <th>Actions</th> 
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {exams.map((exam) => (
+                                <tr key={exam.subject}>
+                                    <td>{exam.subject}</td>
+                                    <td>{exam.user.name}</td>
+                                    <td>{exam.availablity}</td> 
+                                    <td>
+                                        <Link to={`/update-exam/${exam.id}`}> {/* Added valid route */}
+                                            <button className='btn btn-success p-1 m-1'>Update</button>
+                                        </Link>
+                                        <button className='btn btn-danger p-1 m-1'  onClick={() => deleteHandler(exam.id)} >Delete</button>
+                                        <Link to={`/list_all_exam_questions/${exam.id}`} className='btn btn-dark text-light p-1 m-1'>
+                                        Show Questions
+                                        </Link>
+
+                                    </td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </Table>
+                </div>
+            )}
         </div>
-      )}
-    </div>
-  );
+    );
 }
 
 export default ExamTable;

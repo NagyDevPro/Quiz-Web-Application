@@ -1,46 +1,33 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AddQuestion, UpdateQuestion, GetQuestionById } from '../api/question-api';
+import { AddQuestion } from '../api/question-api';
 
-function QuestionForm() {
-    const [formData, setFormData] = useState({
+function QuestionForm({ initialData }) {
+    const [formData, setFormData] = useState(initialData || {
         mark: '',
         question: '',
         choices: [
             { choice: '', correctness: 'correct' },
             { choice: '', correctness: 'wrong' },
             { choice: '', correctness: 'wrong' }
-        ]
+        ],
     });
+    const [exam_id, setExamId] = useState(''); // State for exam ID input
     const [errors, setErrors] = useState({});
     const { id } = useParams();
     const navigate = useNavigate();
 
     useEffect(() => {
-        if (id) {
-            const fetchQuestion = async () => {
-                try {
-                    console.log(`Fetching question with ID: ${id}`);
-                    const response = await GetQuestionById(id);
-                    console.log('Question data:', response.data);
-                    setFormData(response.data);
-                } catch (error) {
-                    console.error('Error fetching question data:', error);
-                }
-            };
-            fetchQuestion();
-        } else {
-            setFormData({
-                mark: '',
-                question: '',
-                choices: [
-                    { choice: '', correctness: 'correct' },
-                    { choice: '', correctness: 'wrong' },
-                    { choice: '', correctness: 'wrong' }
-                ]
-            });
-        }
+        setFormData({
+            mark: '',
+            question: '',
+            choices: [
+                { choice: '', correctness: 'correct' },
+                { choice: '', correctness: 'wrong' },
+                { choice: '', correctness: 'wrong' }
+            ],
+        });
     }, [id]);
 
     const handleChange = (e) => {
@@ -62,6 +49,8 @@ function QuestionForm() {
                 ...prevData,
                 choices: updatedChoices
             }));
+        } else if (name === 'exam_id') {
+            setExamId(value);
         }
     };
 
@@ -69,18 +58,22 @@ function QuestionForm() {
         e.preventDefault();
         const newErrors = validateForm(formData);
         setErrors(newErrors);
-
+        
         if (Object.keys(newErrors).length === 0) {
             try {
-                if (!id) {
-                    console.log('Adding new question:', formData);
-                    await AddQuestion(formData);
-                } else {
-                    console.log(`Updating question with ID: ${id}`, formData);
-                    await UpdateQuestion(formData, id);
+                if (!exam_id) {
+                    throw new Error("Exam ID is required");
                 }
 
-                navigate('/list_all_exam_questions');
+                // Assign examId to formData
+                formData.exam_id = exam_id;
+
+                console.log('Adding new question:', formData);
+                await AddQuestion(formData, exam_id); // Pass examId as a separate parameter
+            
+                // Navigate to the appropriate route after submission
+                navigate(`/list_all_exam_questions/${exam_id}`);
+                
             } catch (error) {
                 console.error('Error submitting question form:', error);
             }
@@ -102,6 +95,11 @@ function QuestionForm() {
                 errors[`choice${index}`] = 'Choice is required';
             }
         });
+        if (!exam_id.trim()) {
+            errors.exam_id = 'Exam ID is required';
+        } else if (isNaN(exam_id)) {
+            errors.exam_id = 'Exam ID must be a number';
+        }
         return errors;
     };
 
@@ -164,6 +162,21 @@ function QuestionForm() {
                         </Form.Group>
                     </React.Fragment>
                 ))}
+            </Row>
+            <Row className="mb-3">
+                <Form.Group as={Col} md="6" controlId="validationFormik105">
+                    <Form.Label>Exam ID</Form.Label>
+                    <Form.Control
+                        type="text"
+                        name="exam_id"
+                        value={exam_id}
+                        onChange={handleChange}
+                        isInvalid={!!errors.exam_id}
+                    />
+                    <Form.Control.Feedback type="invalid">
+                        {errors.exam_id}
+                    </Form.Control.Feedback>
+                </Form.Group>
             </Row>
             <Button type="submit">Submit Question</Button>
         </Form>

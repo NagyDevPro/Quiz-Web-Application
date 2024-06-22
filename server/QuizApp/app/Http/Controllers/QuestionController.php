@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 
 class QuestionController extends Controller
 {
+
     public function store(StoreQuestionRequest $request, string $id)
     {
         $exam = Exam::find($id);
@@ -39,6 +40,7 @@ class QuestionController extends Controller
         return response()->json($question->toArray(), 201);
     }
 
+
     public function update(UpdateQuestionRequest $request, string $id)
     {
         $question = Question::findOrFail($id);
@@ -62,6 +64,7 @@ class QuestionController extends Controller
 
         return response()->json($question->toArray(), 200);
     }
+
     public function destroy(string $id)
     {
         $question = Question::find($id);
@@ -72,11 +75,15 @@ class QuestionController extends Controller
         return response()->json(['message' => 'Question deleted successfully'], 200);
     }
 
-    public function getbyid($id){
-        $question=Question::find($id);
-        if(!$question){
-            return response()->json(['message' => 'question not found'], 500);
+    public function getbyid($id)
+    {
+        $question = Question::with('choices')->find($id);
+    
+        if (!$question) {
+            return response()->json(['message' => 'Question not found'], 404);
         }
-        return $question;
+    
+    
+        return response()->json($question, 200);
     }
 }

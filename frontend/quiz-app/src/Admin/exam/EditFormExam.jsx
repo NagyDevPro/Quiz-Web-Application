@@ -30,7 +30,7 @@ function FormExam() {
     if (exam) {
       setFormData({
         subject: exam.subject || "",
-        teacher_id: 25, 
+        teacher_id: 1, 
         availablity: exam.availablity || "",
       });
     }
@@ -51,7 +51,7 @@ function FormExam() {
     if (Object.keys(newErrors).length === 0) {
       try {
         console.log("Updating exam:", formData);
-        dispatch(updateExam({ formData, id }));
+        dispatch(updateExam({ id, formData }));
         navigate("/exams");
       } catch (error) {
         console.error("Error updating exam:", error);
