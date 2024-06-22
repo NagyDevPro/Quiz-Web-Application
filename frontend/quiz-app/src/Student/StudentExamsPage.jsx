@@ -40,7 +40,7 @@ export default function StudentExamsPage() {
         {exams.map((exam, index) => (
           exam.availablity === 'available' && (
             <div key={exam.id} className="exam-item"  onClick={() => handleExamClick(exam.id)}>
-              <span className="exam-icon "><i class="bi bi-code"></i> </span>
+              <span className="exam-icon "><i className="bi bi-code"></i> </span>
               <span className="exam-name">{exam.subject}</span>
             </div>
           )

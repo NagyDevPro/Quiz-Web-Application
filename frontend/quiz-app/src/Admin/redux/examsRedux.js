@@ -35,6 +35,7 @@ export const showExamById = createAsyncThunk(
       const res = await showSpecificExam(examId);
       return res.data;
     } catch (error) {
+      console.log(error)
       return rejectWithValue(error.message);
     }
   }
@@ -126,6 +127,7 @@ const ExamSlice = createSlice({
       })
       .addCase(showExamById.rejected, (state, action) => {
         state.isLoading = false;
+        console.log(action.payload);
         state.error = action.payload;
       });
   },
