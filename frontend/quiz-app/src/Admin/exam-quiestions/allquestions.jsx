@@ -77,6 +77,10 @@ function QuestionTable() {
                                 </ul>
                             </td>
                             <td>
+                            <Link to={`/questionform-update/${question.id}`}>
+                                    <button className='btn btn-success p-1 m-1'>Update</button>
+                                </Link>
+
                                
                                 <button onClick={() => deleteHandler(question.id)} className='btn btn-danger p-1 m-1'>Delete</button>
                             </td>

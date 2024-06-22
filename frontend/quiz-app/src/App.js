@@ -25,7 +25,6 @@ import StudentExamsPage from "./Student/StudentExamsPage";
 import StudentExamQuestions from "./Student/StudentExamQuestions";
 import StudentExamResult from "./Student/StudentExamResult";
 import ResultsComponent from "./Admin/results/students-results-exams";
-import { UpdateQuestion } from "./Admin/api/question-api";
 import UpdateQuestionForm from "./Admin/exam-quiestions/updateQuestion";
 
 function App() {
@@ -69,8 +68,9 @@ function App() {
               path="/list_all_exam_questions"
               element={<QuestionTable />}
             />
-            <Route path="/questionform" element={<QuestionForm />} />
-            <Route path="/questionform-update/:id" element={<QuestionForm />} />
+             <Route path="/allStudentResults" element={<ResultsComponent />} />
+            <Route path="/questionform/:id" element={<AddQuestionForm examId={id} />} />
+            <Route path="/questionform-update/:id" element={<UpdateQuestionForm />} />
             <Route path="exams" element={<ShowAllExams />} />
             <Route path="/add-exam" element={<FormExam />} />
             <Route path="/update-exam/:id" element={<EditFormExam />} />

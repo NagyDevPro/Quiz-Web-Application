@@ -17,7 +17,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::prefix('exams')->group(function () {
+Route::prefix('exams')->middleware('auth:sanctum')->group(function () {
     Route::get('/', [ExamController::class, 'index']);
     Route::get('/available',[ExamController::class,'showavailableExams']);
     Route::get('/{id}', [ExamController::class, 'show']);
@@ -26,10 +26,12 @@ Route::prefix('exams')->group(function () {
     Route::delete('/{id}', [ExamController::class, 'destroy']);
 });
 
-Route::prefix('questions')->group(function () {
+Route::prefix('questions')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
     Route::post('/{examId}', [QuestionController::class, 'store']);
     Route::put('/{id}', [QuestionController::class, 'update']);
     Route::delete('/{id}', [QuestionController::class, 'destroy']);
+    Route::get('/{id}', [QuestionController::class, 'getbyid']);
+
 });
 
 Route::prefix('results')->middleware('auth:sanctum')->group(function () {
