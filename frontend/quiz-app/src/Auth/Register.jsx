@@ -21,8 +21,8 @@ export default function Register() {
     }
     if (!formData.password) {
       errors.password = 'Password is required';
-    } else if (formData.password.length <= 4) {
-      errors.password = 'Password must be more than 4 characters';
+    } else if (formData.password.length <= 8) {
+      errors.password = 'Password must be more than 8 characters';
     }
     setErrors(errors);
     return errors;
@@ -36,11 +36,10 @@ export default function Register() {
     e.preventDefault();
     const validationErrors = validate();
     if (validationErrors.email || validationErrors.name || validationErrors.password) {
-       setErrors(validationErrors)
-    }
-    else{
-    dispatch(registerUser(formData));
-    routeTo('/login');
+       setErrors(validationErrors);
+    } else {
+      dispatch(registerUser(formData));
+      routeTo('/login');
     }
   };
 
@@ -91,7 +90,7 @@ export default function Register() {
           <p className="mt-3">
             Already have an account? <NavLink to="/login">Login here</NavLink>
           </p>
-          {authState.error && <div className="text-danger mt-3">{authState.error}</div>}
+          {authState.error && <div className="text-danger mt-3">{authState.error.message}</div>}
         </div>
       </div>
     </div>

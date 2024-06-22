@@ -34,8 +34,8 @@ export default function Login() {
     }
     if (!formData.password) {
       errors.password = 'Password is required';
-    } else if (formData.password.length <= 4) {
-      errors.password = 'Password must be more than 4 characters';
+    } else if (formData.password.length <= 8) {
+      errors.password = 'Password must be more than 8 characters';
     }
     setErrors(errors);
     return errors;
@@ -84,7 +84,7 @@ export default function Login() {
           <p className="mt-3">
             Don't have an account? <NavLink to="/register">Register here</NavLink>
           </p>
-          {authState.error && <div className="text-danger mt-3">{authState.error}</div>}
+          {authState.error && <div className="text-danger mt-3">{authState.error.message}</div>}
         </div>
       </div>
     </div>
