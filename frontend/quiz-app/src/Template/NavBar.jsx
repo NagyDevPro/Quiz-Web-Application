@@ -44,7 +44,7 @@ export default function NavBar() {
         {isAdmin && (
           <>
             <NavLink to="/exams" className='nav-link'>Exams</NavLink>
-            <NavLink to="/list_all_exam_questions" className='nav-link'>Questions</NavLink>
+            <NavLink to="/about" className='nav-link'>About Us</NavLink>
           </>
         )}
         {isAuthenticated && (
