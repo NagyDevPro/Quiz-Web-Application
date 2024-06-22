@@ -18,9 +18,9 @@ export default function NavBar() {
 
   const handleLogout = () => {
     dispatch(logoutUser());
-    navigate('/login');
     setIsAdmin(false);
     setIsAuthenticated(false);
+    navigate('/',{replace:true});
   };
 
   return (
