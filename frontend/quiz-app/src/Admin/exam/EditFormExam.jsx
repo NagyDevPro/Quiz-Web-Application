@@ -30,7 +30,7 @@ function FormExam() {
     if (exam) {
       setFormData({
         subject: exam.subject || "",
-        teacher_id: exam.teacher_id || "", 
+        teacher_id: 25, 
         availablity: exam.availablity || "",
       });
     }

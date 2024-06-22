@@ -42,14 +42,22 @@ class ExamController extends Controller
             'exam' => $exam
         ], 201);
     }
-    public function update(UpdateExamRequest $request, string $id)
+
+    public function update(UpdateExamRequest $request, $id)
     {
-        $exam = Exam::find($id);
-        if (!$exam) {
-            return response()->json(['message' => 'Exam not found'], 500);
+        try {
+            $exam = Exam::findOrFail($id);
+
+            $exam->subject = $request->input('subject');
+            $exam->teacher_id = $request->input('teacher_id');
+            $exam->availablity = $request->input('availablity');
+
+            $exam->save();
+
+            return response()->json(['message' => 'Exam updated successfully', 'exam' => $exam], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Failed to update exam: ' . $e->getMessage()], 500);
         }
-        $exam->update($request->validated());
-        return response()->json($exam, 200);
     }
     public function destroy(string $id)
     {
