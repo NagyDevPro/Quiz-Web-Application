@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { loginUser } from '../Admin/redux/authRedux';
 import "./Auth.css";
 
@@ -9,6 +9,17 @@ export default function Login() {
   const [errors, setErrors] = useState({});
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (authState.isAuthenticated) {
+      if (authState.role === 'admin') {
+        navigate('/exams');
+      } else {
+        navigate('/');
+      }
+    }
+  }, [authState.isAuthenticated, authState.role, navigate]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
@@ -33,12 +44,10 @@ export default function Login() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const validationErrors = validate();
-    if (validationErrors.email || validationErrors.password) {
-      setErrors(validationErrors); 
-    }else{
-    dispatch(loginUser(formData));
-    }  
-};
+    if (!validationErrors.email && !validationErrors.password) {
+      dispatch(loginUser(formData));
+    }
+  };
 
   return (
     <div className="auth-container container mt-5">

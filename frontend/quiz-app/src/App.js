@@ -20,6 +20,9 @@ import QuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
 import FormExam from "./Admin/exam/FormExam";
 import EditFormExam from "./Admin/exam/EditFormExam";
 import { ProtectedRoute, PublicRoute } from "./Guards/ProtectedRoute";
+import StudentExamsPage from "./Student/StudentExamsPage";
+import StudentExamQuestions from "./Student/StudentExamQuestions";
+import StudentExamResult from "./Student/StudentExamResult";
 
 function App() {
   //general routes
@@ -29,16 +32,20 @@ function App() {
         <Route path="/" element={<IndexPage />}>
           <Route index element={<HomePage />} />
 
-          
           <Route element={<PublicRoute />}>
             <Route path="about" element={<AboutUs />} />
             <Route path="contact" element={<ContactUs />} />
             <Route path="login" element={<Login />} />
             <Route path="register" element={<Register />} />
           </Route>
-          
-          
 
+          {/* studentRoute */}
+          <Route element={<ProtectedRoute />}>
+            <Route to="student-exams" element={<StudentExamsPage/>}/>
+            <Route to="student-exam/:id" element={<StudentExamQuestions/>} />
+            <Route to="student-result" element={<StudentExamResult/>}/>
+
+          </Route>
 
           {/* admin section */}
           <Route element={<ProtectedRoute admin={true} />}>
@@ -50,8 +57,8 @@ function App() {
             <Route path="/questionform-update/:id" element={<QuestionForm />} />
             <Route path="/static" element={<StaticQuestionTable />} />
             <Route path="exams" element={<ShowAllExams />} />
-            <Route path="/add-exam" element={<FormExam/>}/>
-          <Route path="/update-exam/:id" element={<EditFormExam/>}/>
+            <Route path="/add-exam" element={<FormExam />} />
+            <Route path="/update-exam/:id" element={<EditFormExam />} />
           </Route>
           <Route path="*" element={<NotFound />} />
         </Route>
