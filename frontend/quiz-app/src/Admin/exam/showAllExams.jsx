@@ -34,16 +34,16 @@ function ExamTable() {
                             <tr className='text-center'>
                                 <th>Subject</th>
                                 <th>Teacher</th>
-                                <th>Availability</th> {/* Corrected typo */}
-                                <th>Actions</th> {/* Added Actions column */}
+                                <th>Availability</th> 
+                                <th>Actions</th> 
                             </tr>
                         </thead>
                         <tbody>
                             {exams.map((exam) => (
                                 <tr key={exam.subject}>
-                                    <td>{exam.subject}</td> {/* Corrected mapping */}
-                                    <td>{exam.teacher_id}</td>
-                                    <td>{exam.availability}</td> {/* Corrected typo */}
+                                    <td>{exam.subject}</td>
+                                    <td>{exam.user.name}</td>
+                                    <td>{exam.availablity}</td> 
                                     <td>
                                         <Link to={`/update-exam/${exam.id}`}> {/* Added valid route */}
                                             <button className='btn btn-success p-1 m-1'>Update</button>

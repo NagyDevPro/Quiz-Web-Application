@@ -17,7 +17,7 @@ Route::post('register', [UserController::class, 'register']);
 Route::post('login', [UserController::class, 'login']);
 Route::post('logout', [UserController::class, 'logout'])->middleware('auth:sanctum');
 
-Route::prefix('exams')->middleware('auth:sanctum')->group(function () {
+Route::prefix('exams')->group(function () {
     Route::get('/', [ExamController::class, 'index']);
     Route::get('/available',[ExamController::class,'showavailableExams']);
     Route::get('/{id}', [ExamController::class, 'show']);
