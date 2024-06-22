@@ -1,27 +1,34 @@
-import React, { useEffect } from 'react';
-import { Table } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllExams } from '../redux/examsRedux';
-import { Link } from 'react-router-dom';
+import React, { useEffect } from "react";
+import { Table } from "react-bootstrap";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllExams } from "../redux/examsRedux";
+import { Link } from "react-router-dom";
+import { deleteExam } from "../api/exams-api";
 
 function ExamTable() {
-    const { exams, isLoading, error } = useSelector(state => state.exam); // Corrected state selector
-    const dispatch = useDispatch();
+  const { exams, isLoading, error } = useSelector((state) => state.exam);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        dispatch(getAllExams());
-    }, [dispatch]);
+  useEffect(() => {
+    dispatch(getAllExams());
+  }, [dispatch]);
 
-    return (
-        <div className='mt-4 bg-light p-5 w-100'>
-            {isLoading && <h1 className='alert alert-success text-dark'>Loading...</h1>}
-            {error ? (
-                <h1 className='alert alert-danger'>Error: {error}</h1>
-            ) : (
-                <div>
-                    <Link to='/add-exam'> {/* Added valid route */}
-                        <button className='btn btn-primary p-1 m-1'>Add Exam</button>
-                    </Link>
+  const deleteHandler = (examId) => {
+    dispatch(deleteExam(examId));
+  };
+
+  return (
+    <div className="mt-4 p-5 w-100">
+      {isLoading && (
+        <h1 className="alert alert-success text-dark">Loading...</h1>
+      )}
+      {error ? (
+        <h1 className="alert alert-danger">Error: {error}</h1>
+      ) : (
+        <div>
+          <Link to="/add-exam">
+            <button className="btn btn-primary p-1 m-1">Add Exam</button>
+          </Link>
 
                     <Table striped bordered hover size="lg">
                         <thead>
@@ -42,10 +49,11 @@ function ExamTable() {
                                         <Link to={`/update-exam/${exam.id}`}> {/* Added valid route */}
                                             <button className='btn btn-success p-1 m-1'>Update</button>
                                         </Link>
-                                        <button className='btn btn-danger p-1 m-1'>Delete</button>
+                                        <button className='btn btn-danger p-1 m-1'  onClick={() => deleteHandler(exam.id)} >Delete</button>
                                         <Link to={`/list_all_exam_questions/${exam.id}`} className='btn btn-dark text-light p-1 m-1'>
                                         Show Questions
                                         </Link>
+
                                     </td>
                                 </tr>
                             ))}

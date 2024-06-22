@@ -11,11 +11,11 @@ class Exam extends Model
     protected $fillable = [
         'subject',
         'teacher_id',
-        'available',
+        'availablity',
     ];
-    public function teacher()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'teacher_id');
+        return $this->belongsTo(User::class,'teacher_id');
     }
 
     public function questions()
