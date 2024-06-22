@@ -35,7 +35,7 @@ class StudentExamController extends Controller
     }
     public function store(StoreStudentExamRequest $request)
     {
-        $student_id =  Auth::id();
+        $student_id = $request->input('student_id');
         $exam_id = $request->input('exam_id');
 
         $existingStudentExam = StudentExam::where('student_id', $student_id)

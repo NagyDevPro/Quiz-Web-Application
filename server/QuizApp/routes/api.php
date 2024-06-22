@@ -26,7 +26,7 @@ Route::prefix('exams')->group(function () {
     Route::delete('/{id}', [ExamController::class, 'destroy']);
 });
 
-Route::prefix('questions')->middleware(['auth:sanctum', 'role:admin'])->group(function () {
+Route::prefix('questions')->group(function () {
     Route::post('/{examId}', [QuestionController::class, 'store']);
     Route::put('/{id}', [QuestionController::class, 'update']);
     Route::delete('/{id}', [QuestionController::class, 'destroy']);
@@ -34,9 +34,9 @@ Route::prefix('questions')->middleware(['auth:sanctum', 'role:admin'])->group(fu
 
 });
 
-Route::prefix('results')->middleware('auth:sanctum')->group(function () {
-    Route::get('/', [StudentExamController::class, 'index'])->middleware('role:admin');
-    Route::get('/my-results/', [StudentExamController::class, 'showAllResultofStudent'])->middleware('role:student');
-    Route::get('/{examId}', [StudentExamController::class, 'show'])->middleware('role:student');
+Route::prefix('results')->group(function () {
+    Route::get('/', [StudentExamController::class, 'index']);
+    Route::get('/my-results/', [StudentExamController::class, 'showAllResultofStudent']);
+    Route::get('/{examId}', [StudentExamController::class, 'show']);
     Route::post('/', [StudentExamController::class, 'store']);
 });
