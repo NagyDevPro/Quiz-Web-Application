@@ -10,7 +10,7 @@ export default function Register() {
   const dispatch = useDispatch();
   const authState = useSelector((state) => state.auth);
   const routeTo = useNavigate();
-  
+
   const validate = () => {
     const errors = {};
     if (!formData.name) errors.name = 'Name is required';
@@ -39,7 +39,9 @@ export default function Register() {
        setErrors(validationErrors);
     } else {
       dispatch(registerUser(formData));
-      routeTo('/login');
+       if (!authState.error ) {
+        routeTo('/login');
+    }
     }
   };
 

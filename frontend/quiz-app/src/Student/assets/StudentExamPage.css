@@ -1,0 +1,77 @@
+.exams-container {
+  text-align: center;
+  padding: 2rem;
+  border-radius: 8px;
+}
+
+.exams-container h1 {
+  font-size: 3.5rem;
+  font-weight: 500;
+  color: #162454;
+  margin-bottom: 1rem;
+}
+
+.exams-container p {
+  color: #1d3480;
+  font-size: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.exams-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.exam-item {
+  display: flex;
+  padding: 1rem 2rem;
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 35%;
+  font-weight: 500;
+  justify-content: baseline;
+  cursor: pointer;
+  transition: transform 0.2s ease-in-out;
+}
+
+.exam-item:hover {
+  transform: scale(1.05);
+}
+
+.exam-icon {
+  font-size: 2rem;
+  margin-right: 1rem;
+  color: #333;
+}
+
+.exam-name {
+  font-size: 1.5rem;
+  color: #333;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.bigger-spinner {
+  width: 5rem;
+  height: 5rem;
+  border-width: 0.5rem;
+}
+
+.error-message {
+  color: red;
+  font-size: 1.25rem;
+  margin-top: 1rem;
+  text-align: center;
+  padding: 1rem;
+  border: 1px solid red;
+  border-radius: 5px;
+  background-color: #f8d7da;
+}
