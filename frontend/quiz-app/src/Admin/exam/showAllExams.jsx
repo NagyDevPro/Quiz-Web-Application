@@ -43,6 +43,9 @@ function ExamTable() {
                                             <button className='btn btn-success p-1 m-1'>Update</button>
                                         </Link>
                                         <button className='btn btn-danger p-1 m-1'>Delete</button>
+                                        <Link to={`/list_all_exam_questions/${exam.id}`} className='btn btn-dark text-light p-1 m-1'>
+                                        Show Questions
+                                        </Link>
                                     </td>
                                 </tr>
                             ))}

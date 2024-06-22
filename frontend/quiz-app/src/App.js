@@ -4,6 +4,7 @@ import {
   RouterProvider,
   createBrowserRouter,
   createRoutesFromElements,
+  useParams,
 } from "react-router-dom";
 
 import HomePage from "./Student/HomePage";
@@ -15,10 +16,11 @@ import Login from "./Auth/Login";
 import Register from "./Auth/Register";
 import ShowAllExams from "./Admin/exam/showAllExams";
 import QuestionTable from "./Admin/exam-quiestions/allquestions";
-import StaticQuestionTable from "./Admin/exam-quiestions/staticData";
-import QuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
+import AddQuestionForm from "./Admin/exam-quiestions/addUpdateQuestion";
 
 function App() {
+  const { id } = useParams(); 
+
   //general routes
   const router = createBrowserRouter(
     createRoutesFromElements(
@@ -29,10 +31,10 @@ function App() {
           <Route path="contact" element={<ContactUs />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="/list_all_exam_questions/:id" element={<QuestionTable />} />
           <Route path="/list_all_exam_questions" element={<QuestionTable />} />
-          <Route path="/questionform" element={<QuestionForm />} />
-          <Route path="/questionform-update/:id" element={<QuestionForm />} />
-          <Route path="/static" element={<StaticQuestionTable />} />
+          <Route path="/questionform/:id" element={<AddQuestionForm examId={id} />} />
+          <Route path="/questionform-update/:id" element={<AddQuestionForm />} />
           <Route path="exams" element={<ShowAllExams />} />
 
           <Route path="*" element={<NotFound />} />
