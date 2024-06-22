@@ -11,7 +11,8 @@ class StudentExamController extends Controller
 {
     public function index()
     {
-        return StudentExam::all();
+        $studentExams = StudentExam::with(['student', 'exam'])->get();
+        return response()->json($studentExams);
     }
     public function showAllResultofStudent()
     {
