@@ -54,7 +54,7 @@ export const destroyExam = createAsyncThunk(
 
 
 export const addExam = createAsyncThunk(
-  "question/addExam",
+  "exam/addExam",
   async (exam, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
@@ -67,7 +67,7 @@ export const addExam = createAsyncThunk(
 );
 
 export const updateExam = createAsyncThunk(
-  "question/editExam",
+  "exam/editExam",
   async ({ exam, id }, thunkApi) => {
     const { rejectWithValue } = thunkApi;
     try {
