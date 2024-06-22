@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { Table } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllExams } from "../redux/examsRedux";
+import { getAllExams,destroyExam } from "../redux/examsRedux";
 import { Link } from "react-router-dom";
-import { deleteExam } from "../api/exams-api";
 
 function ExamTable() {
   const { exams, isLoading, error } = useSelector((state) => state.exam);
@@ -14,7 +13,7 @@ function ExamTable() {
   }, [dispatch]);
 
   const deleteHandler = (examId) => {
-    dispatch(deleteExam(examId));
+    dispatch(destroyExam(examId));
   };
 
   return (
