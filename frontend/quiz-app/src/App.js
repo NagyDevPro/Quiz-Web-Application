@@ -57,7 +57,7 @@ function App() {
           {/* studentRoute */}
           <Route element={<ProtectedRoute />}>
             <Route path="student-exams" element={<StudentExamsPage/>}/>
-            <Route path="student-exam/:id" element={<StudentExamQuestions/>} />
+            <Route path="student-exam/:examId" element={<StudentExamQuestions/>} />
             <Route path="student-result" element={<StudentExamResult/>}/>
 
           </Route>
