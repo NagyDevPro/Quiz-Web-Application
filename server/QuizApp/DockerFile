@@ -1,0 +1,37 @@
+# Install php 
+FROM php:8.2-fpm
+
+# Install necessary dependencies
+RUN apt-get update && apt-get install -y \
+    zip \
+    unzip \
+    git \
+    libzip-dev \
+    && docker-php-ext-install zip
+
+# Copy required files from composer
+COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
+# Set environment variable to allow Composer to run as root
+ENV COMPOSER_ALLOW_SUPERUSER=1
+
+# Copy existing directories
+COPY . .
+
+# Copy .env.example to .env
+COPY .env.example .env
+
+# Install composer dependencies
+RUN composer install
+
+# Generate application key
+RUN php artisan key:generate
+
+# Make the script executable
+RUN chmod +x ./run-laravel-server.sh
+
+# Expose port 8000
+EXPOSE 8000
+
+# Start the server
+CMD ["sh", "./run-laravel-server.sh"]
